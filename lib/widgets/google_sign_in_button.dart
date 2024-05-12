@@ -1,5 +1,4 @@
-
-import 'package:firebase_assignment/screens/user_info_screen.dart';
+import 'package:firebase_assignment/screens/home_screen.dart';
 import 'package:firebase_assignment/utils/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,27 +27,31 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   ),
                 ),
               ),
-             onPressed: () async {
-              setState(() {
-                _isSigningIn = true;
-              });
+              onPressed: () async {
+                setState(() {
+                  _isSigningIn = true;
+                });
 
-              User? user = await Authentication.signInWithGoogle(context: context);
+                User? user =
+                    await Authentication.signInWithGoogle(context: context);
 
-              setState(() {
-                _isSigningIn = false;
-              });
+                setState(() {
+                  _isSigningIn = false;
+                });
 
-              if (user != null) {
-                Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => UserInfoScreen(user: user,),
-              ),
-            );
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-            child: Row(
+                if (user != null) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(
+                        user: user,
+                      ),
+                    ),
+                  );
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
