@@ -27,7 +27,7 @@ class _TodoPageState extends State<TodoPage> {
     print('Data added successfully');
   } catch (e) {
     print('Error adding data: $e');
-  }
+  }
 }
 
 
