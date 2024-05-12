@@ -1,29 +1,28 @@
-
 import 'package:firebase_assignment/screens/sign_in_screen.dart';
 import 'package:firebase_assignment/utils/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class UserInfoScreen extends StatefulWidget {
-  const UserInfoScreen({Key? key, required User user})
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key, required User user})
       : _user = user,
         super(key: key);
 
   final User _user;
 
   @override
-  _UserInfoScreenState createState() => _UserInfoScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _UserInfoScreenState extends State<UserInfoScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   late User _user;
   bool _isSigningOut = false;
 
   Route _routeToSignInScreen() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => SignInScreen(),
+      pageBuilder: (context, animation, secondaryAnimation) => const SignInScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin = Offset(-1.0, 0.0);
+        var begin = const Offset(-1.0, 0.0);
         var end = Offset.zero;
         var curve = Curves.ease;
 
@@ -48,7 +47,6 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
       appBar: AppBar(
         elevation: 0,
       ),
@@ -62,59 +60,21 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(),
-              _user.photoURL != null
-                  ? ClipOval(
-                      child: Material(
-                        child: Image.network(
-                          _user.photoURL!,
-                          fit: BoxFit.fitHeight,
-                        ),
-                      ),
-                    )
-                  : ClipOval(
-                      child: Material(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Icon(
-                            Icons.person,
-                            size: 60,
-                          ),
-                        ),
-                      ),
-                    ),
-              SizedBox(height: 16.0),
-              Text(
+              const Text(
                 'Hello',
                 style: TextStyle(
                   fontSize: 26,
                 ),
               ),
-              SizedBox(height: 8.0),
-              Text(
-                _user.displayName!,
-                style: TextStyle(
-                  fontSize: 26,
-                ),
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                '( ${_user.email!} )',
-                style: TextStyle(
-                  fontSize: 20,
-                  letterSpacing: 0.5,
-                ),
-              ),
-              SizedBox(height: 24.0),
-              Text(
+              const SizedBox(height: 24.0),
+              const Text(
                 'You are now signed in using your Google account. To sign out of your account click the "Sign Out" button below.',
-                style: TextStyle(
-                    fontSize: 14,
-                    letterSpacing: 0.2),
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, letterSpacing: 0.2),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               _isSigningOut
-                  ? CircularProgressIndicator(
+                  ? const CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     )
                   : ElevatedButton(
@@ -139,7 +99,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                         Navigator.of(context)
                             .pushReplacement(_routeToSignInScreen());
                       },
-                      child: Padding(
+                      child: const Padding(
                         padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: Text(
                           'Sign Out',
