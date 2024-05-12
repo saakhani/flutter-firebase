@@ -186,73 +186,82 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .map((DocumentSnapshot document) {
                               Map<String, dynamic> data =
                                   document.data()! as Map<String, dynamic>;
-                              return Card(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                color: Color.fromARGB(238, 253, 253, 253),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              ClipOval(
-                                                child: Image.network(
-                                                  data['profile']!,
-                                                  width: 30,
+                              return GestureDetector(
+                                onTap: (){
+                                  Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => CreatePage(user: widget.userVer,),
+        ),
+      );
+                                },
+                                child: Card(
+                                  margin: EdgeInsets.symmetric(vertical: 10),
+                                  color: Color.fromARGB(238, 253, 253, 253),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 20),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ClipOval(
+                                                  child: Image.network(
+                                                    data['profile']!,
+                                                    width: 30,
+                                                  ),
                                                 ),
-                                              ),
-                                            
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(data['uploaderName'],
-                                              style: GoogleFonts.roboto(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w700,
-                                                color: Color.fromARGB(
-                                                    255, 133, 133, 133),
-                                              )),
+                                              
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(data['uploaderName'],
+                                                style: GoogleFonts.roboto(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Color.fromARGB(
+                                                      255, 133, 133, 133),
+                                                )),
+                                                ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Text(_getTime(data['created']),
+                                                style: GoogleFonts.roboto(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Color.fromARGB(
+                                                      255, 133, 133, 133),
+                                                )),
                                               ],
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          data['title'],
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w700,
                                           ),
-                                          Column(
-                                            children: [
-                                              Text(_getTime(data['created']),
-                                              style: GoogleFonts.roboto(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w700,
-                                                color: Color.fromARGB(
-                                                    255, 133, 133, 133),
-                                              )),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        data['title'],
-                                        style: GoogleFonts.roboto(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w700,
                                         ),
-                                      ),
-                                      Text(
-                                        data['description'],
-                                        style: GoogleFonts.roboto(
-                                          fontSize: 16,
-                                          color: Color.fromARGB(
-                                              255, 133, 133, 133),
-                                          fontWeight: FontWeight.w500,
+                                        Text(
+                                          data['description'],
+                                          style: GoogleFonts.roboto(
+                                            fontSize: 16,
+                                            color: Color.fromARGB(
+                                                255, 133, 133, 133),
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );

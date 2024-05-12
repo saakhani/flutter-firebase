@@ -35,6 +35,17 @@ class _CreatePageState extends State<CreatePage> {
     super.initState();
   }
 
+    void _onItemTapped(int index) {
+    if (index == 0){
+       Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(user: widget.userVer,),
+        ),
+      );
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final creatorController = TextEditingController();
@@ -65,7 +76,9 @@ class _CreatePageState extends State<CreatePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
+          backgroundColor: Colors.redAccent,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add, size: 36,),
           onPressed: () {
             // get first, last name from controllers
             final created = DateTime.timestamp();
@@ -89,6 +102,25 @@ class _CreatePageState extends State<CreatePage> {
         ),
       );;
           }),
+    bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color.fromARGB(255, 240, 240, 240),
+        currentIndex: 1,
+        iconSize: 40,
+        selectedFontSize: 18,
+        unselectedFontSize: 18,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Create',
+          ),
+        ],
+        selectedItemColor: Colors.redAccent,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
