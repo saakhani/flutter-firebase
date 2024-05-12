@@ -9,11 +9,12 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key, required User user})
-      : _user = user,
+  final User userVer;
+  const HomeScreen({Key? key, required user})
+      : userVer = user,
         super(key: key);
 
-  final User _user;
+
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (index == 1){
        Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => CreatePage(),
+          builder: (context) => CreatePage(user: widget.userVer,),
         ),
       );
     }
@@ -89,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    _user = widget._user;
+    _user = widget.userVer;
     super.initState();
   }
 

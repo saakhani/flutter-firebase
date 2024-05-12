@@ -16,19 +16,22 @@ class CloudFirestoreService {
 }
 
 class CreatePage extends StatefulWidget {
-  CreatePage({super.key});
+  final User userVer;
+  CreatePage({super.key, required user}) : userVer = user;
 
   @override
   State<CreatePage> createState() => _CreatePageState();
 }
 
 class _CreatePageState extends State<CreatePage> {
+  late User _user;
   CloudFirestoreService? service;
 
   @override
   void initState() {
     // Initialize an instance of Cloud Firestore
     service = CloudFirestoreService(FirebaseFirestore.instance);
+    _user = widget.userVer;
     super.initState();
   }
 
@@ -80,7 +83,11 @@ class _CreatePageState extends State<CreatePage> {
               'uploaderName': uploaderName
             }));
 
-            Navigator.pop(context);
+                  Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(user: widget.userVer,),
+        ),
+      );;
           }),
     );
   }

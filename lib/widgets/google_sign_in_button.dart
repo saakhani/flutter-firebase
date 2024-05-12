@@ -40,13 +40,11 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
 
                 if (user != null) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(
-                        user: user,
-                      ),
-                    ),
-                  );
+                          Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen(user: user)),
+          (route) => false,
+        );
                 }
               },
               child: Padding(
