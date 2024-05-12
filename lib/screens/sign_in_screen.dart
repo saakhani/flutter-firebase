@@ -23,7 +23,7 @@ class SignInScreenState extends State<SignInScreen> {
           ),
           child: Center(
             child: FutureBuilder(
-              future: Authentication.initializeFirebase(),
+              future: Authentication.initializeFirebase(context: context),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Text('Error initializing Firebase');

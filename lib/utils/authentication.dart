@@ -1,3 +1,4 @@
+import 'package:firebase_assignment/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -5,13 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication {
-  static Future<FirebaseApp> initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
+  static Future<FirebaseApp> initializeFirebase({
+  required BuildContext context,
+}) async {
+  FirebaseApp firebaseApp = await Firebase.initializeApp();
 
-    // TODO: Add auto login logic
+  User? user = FirebaseAuth.instance.currentUser;
 
-    return firebaseApp;
+  if (user != null) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => HomeScreen(
+          user: user,
+        ),
+      ),
+    );
   }
+
+  return firebaseApp;
+}
 
   static SnackBar customSnackBar({required String content}) {
     return SnackBar(
